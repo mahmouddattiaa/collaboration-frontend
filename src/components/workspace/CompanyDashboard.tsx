@@ -5,7 +5,11 @@ import { TabPanel } from '@/components/collabUI/common/TabPanel';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export function CompanyDashboard() {
+interface CompanyDashboardProps {
+  dashboardName?: string;
+}
+
+export function CompanyDashboard({ dashboardName = "Company Dashboard" }: CompanyDashboardProps) {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
@@ -21,7 +25,7 @@ export function CompanyDashboard() {
   return (
     <div className="w-full space-y-6 bg-gradient-to-br from-theme-dark via-theme-darker to-theme-dark/90 min-h-screen p-6 backdrop-blur-lg">
       <div className="flex items-center justify-between bg-white/5 p-4 rounded-lg backdrop-blur-md border border-white/10">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-theme-primary to-theme-secondary bg-clip-text text-transparent">Company Dashboard</h2>
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-theme-primary to-theme-secondary bg-clip-text text-transparent">{dashboardName}</h2>
         <div className="flex items-center gap-4">
           <Button variant="outline" size="icon" className="bg-white/5 border-white/10 hover:bg-white/10">
             <Bell className="w-4 h-4" />
@@ -246,38 +250,144 @@ function ProjectsTab() {
 }
 
 function AnalyticsTab() {
+  // Placeholder data for project analytics
+  const projectAnalyticsData = {
+    totalProjects: 12,
+    activeProjects: 8,
+    completedProjects: 4,
+    overallProgress: 65, // percentage
+    tasksCompleted: 150,
+    tasksPending: 75,
+    upcomingDeadlines: 3, // Number of projects/tasks due soon
+    issuesReported: 12,
+  };
+
+  const projectsSummary = [
+    { id: 'proj1', name: 'Project Alpha', status: 'On Track', progress: 80, tasks: 25, deadline: '2024-07-15', teamSize: 5 },
+    { id: 'proj2', name: 'Project Beta', status: 'At Risk', progress: 45, tasks: 40, deadline: '2024-08-01', teamSize: 7 },
+    { id: 'proj3', name: 'Project Gamma', status: 'Delayed', progress: 30, tasks: 30, deadline: '2024-06-30', teamSize: 4 },
+    { id: 'proj4', name: 'Project Delta', status: 'Completed', progress: 100, tasks: 20, deadline: '2024-05-20', teamSize: 6 },
+  ];
+
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <MetricCard
-          title="Total Revenue"
-          value="$24,500"
-          change="+12.5%"
-          isPositive={true}
+    <div className="space-y-8">
+      {/* Top Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <AnalyticsMetricCard
+          title="Total Projects"
+          value={projectAnalyticsData.totalProjects.toString()}
+          icon={<Briefcase className="w-6 h-6 text-theme-primary" />}
         />
-        <MetricCard
-          title="Active Users"
-          value="1,234"
-          change="+3.2%"
-          isPositive={true}
+        <AnalyticsMetricCard
+          title="Active Projects"
+          value={projectAnalyticsData.activeProjects.toString()}
+          icon={<Zap className="w-6 h-6 text-theme-secondary" />}
         />
-        <MetricCard
-          title="Conversion Rate"
-          value="2.4%"
-          change="-0.5%"
-          isPositive={false}
+        <AnalyticsMetricCard
+          title="Overall Progress"
+          value={`${projectAnalyticsData.overallProgress}%`}
+          icon={<TrendingUp className="w-6 h-6 text-theme-emerald" />}
+        />
+        <AnalyticsMetricCard
+          title="Issues Reported"
+          value={projectAnalyticsData.issuesReported.toString()}
+          icon={<Shield className="w-6 h-6 text-theme-red" />}
         />
       </div>
 
-      <div className="bg-dark/30 backdrop-blur-sm border border-white/10 rounded-lg p-4">
-        <h3 className="text-lg font-medium mb-4">Performance Overview</h3>
-        <div className="h-64 flex items-center justify-center text-white/40">
-          Chart placeholder - Will integrate with a charting library
+      {/* Charts Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="dashboard-widget p-6">
+          <h3 className="text-xl font-semibold mb-4 text-white">Project Status Distribution</h3>
+          <div className="h-72 flex items-center justify-center text-white/40">
+            Chart placeholder - e.g., Pie chart for On Track, At Risk, Delayed
+          </div>
+        </div>
+        <div className="dashboard-widget p-6">
+          <h3 className="text-xl font-semibold mb-4 text-white">Task Completion Trends</h3>
+          <div className="h-72 flex items-center justify-center text-white/40">
+            Chart placeholder - e.g., Line chart for tasks completed over time
+          </div>
         </div>
       </div>
+
+      {/* Project Summary Table/List */}
+      <div className="dashboard-widget p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-xl font-semibold text-white">Projects Overview</h3>
+          <Button variant="outline" size="sm" className="text-sm">View All Projects</Button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b border-white/10 text-sm text-white/70">
+                <th className="py-3 px-4 font-normal">Project Name</th>
+                <th className="py-3 px-4 font-normal">Status</th>
+                <th className="py-3 px-4 font-normal">Progress</th>
+                <th className="py-3 px-4 font-normal">Tasks</th>
+                <th className="py-3 px-4 font-normal">Deadline</th>
+                <th className="py-3 px-4 font-normal text-right">Team Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              {projectsSummary.map((project) => (
+                <tr key={project.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                  <td className="py-3 px-4">{project.name}</td>
+                  <td className="py-3 px-4">
+                    <span className={cn(
+                      "px-2 py-1 text-xs rounded-full",
+                      project.status === 'On Track' && "bg-theme-emerald/20 text-theme-emerald",
+                      project.status === 'At Risk' && "bg-theme-yellow/20 text-theme-yellow",
+                      project.status === 'Delayed' && "bg-theme-red/20 text-theme-red",
+                      project.status === 'Completed' && "bg-theme-gray/20 text-theme-gray"
+                    )}>
+                      {project.status}
+                    </span>
+                  </td>
+                  <td className="py-3 px-4">
+                    <div className="w-full bg-white/10 rounded-full h-2.5">
+                      <div
+                        className={cn("h-2.5 rounded-full", project.progress === 100 ? "bg-theme-emerald" : "bg-theme-primary")}
+                        style={{ width: `${project.progress}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs ml-1">{project.progress}%</span>
+                  </td>
+                  <td className="py-3 px-4">{project.tasks}</td>
+                  <td className="py-3 px-4">{project.deadline}</td>
+                  <td className="py-3 px-4 text-right">{project.teamSize}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   );
 }
+
+// Helper component for metric cards in AnalyticsTab
+function AnalyticsMetricCard({ title, value, icon, description }: {
+  title: string;
+  value: string;
+  icon: React.ReactNode;
+  description?: string;
+}) {
+  return (
+    <div className="dashboard-widget p-5 flex flex-col justify-between">
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <h4 className="text-white/70 font-medium">{title}</h4>
+          {icon}
+        </div>
+        <p className="text-3xl font-bold text-white mb-2">{value}</p>
+      </div>
+      {description && <p className="text-xs text-white/50">{description}</p>}
+    </div>
+  );
+}
+
 
 function TeamTab() {
   return (

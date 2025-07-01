@@ -323,7 +323,7 @@ export function CollaborationRoomContent() {
                 }}
               />
             )}
-            {activeTab === 'dashboard' && <CompanyDashboard />}
+            {activeTab === 'dashboard' && <CompanyDashboard dashboardName={room?.dashboardName} />}
             {activeTab === 'project-tracker' && <ProjectTracker />}
             {activeTab === 'conference' && <ConferencePanel />}
             {activeTab === 'editor' && <NotionLikeEditor />}

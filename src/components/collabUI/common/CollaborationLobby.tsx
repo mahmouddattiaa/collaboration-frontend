@@ -77,32 +77,6 @@ export function CollaborationLobby() {
           </p>
         </div>
 
-        {/* Quick Actions Bar */}
-        <div className="dashboard-card">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white">Quick Actions</h2>
-            <div className="w-6 h-6 rounded-lg bg-theme-primary/20 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-theme-primary" />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {quickActions.map((action, index) => (
-              <button
-                key={index}
-                className="action-button text-left group"
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-theme-primary/20 flex items-center justify-center group-hover:bg-theme-primary/30 transition-colors">
-                    {action.icon}
-                  </div>
-                </div>
-                <h3 className="font-medium text-sm text-white mb-1">{action.title}</h3>
-                <p className="text-xs text-theme-gray-light">{action.description}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Main Action Cards */}
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {/* Create Room Card */}
