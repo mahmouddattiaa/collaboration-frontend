@@ -135,14 +135,7 @@ export function CollaborationRoomContent() {
         <div className="text-center p-8 bg-dark/80 backdrop-blur-glass rounded-xl shadow-custom border border-white/10">
           <h1 className="text-4xl font-bold text-white mb-2">Collaboration Hub</h1>
           <p className="text-lg text-gray mb-8">Create a new room or join an existing one.</p>
-          <Button 
-            onClick={() => navigate('/collaboration/new')} 
-            size="lg" 
-            className="gap-2 bg-gradient-to-r from-theme-primary to-theme-secondary hover:from-theme-primary-dark hover:to-theme-primary text-white shadow-glow"
-          >
-            <Plus className="w-5 h-5" />
-            Create New Room
-          </Button>
+          <CreateRoom onClose={() => navigate('/')} />
         </div>
       </div>
     );

@@ -7,8 +7,8 @@ function App() {
   return (
     <CollaborationProvider>
       <Routes>
-        <Route path="/" element={<Navigate to="/room" />} />
-        <Route path="/room/:roomId?" element={<CollaborationRoom />} />
+        <Route path="/" element={<Navigate to="/collaboration" />} />
+        <Route path="/collaboration/:roomId?" element={<CollaborationRoom />} />
       </Routes>
     </CollaborationProvider>
   );
