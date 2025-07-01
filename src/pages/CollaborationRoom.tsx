@@ -46,11 +46,13 @@ import { CollaborationProvider, useCollaboration } from "@/contexts/Collaboratio
 import { useAuth } from '@/contexts/AuthContext';
 import { Spinner } from '@/components/ui/spinner';
 import { CreateRoom } from '@/components/collabUI/modals/CreateRoom';
+import { JoinRoom } from '@/components/collabUI/modals/JoinRoom';
 import { NotionLikeEditor } from '@/components/collabUI/common/NotionLikeEditor';
 import { RealtimeCollaborationIndicator } from '@/components/collabUI/common/RealtimeCollaborationIndicator';
 import { TabBar } from '@/components/collabUI/common/TabBar';
 import { TabPanel } from '@/components/collabUI/common/TabPanel';
 import { ProjectTracker } from '@/components/collabUI/workspace/ProjectTracker';
+import { CollaborationLobby } from '@/components/collabUI/common/CollaborationLobby';
 
 class CollaborationErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -129,16 +131,9 @@ export function CollaborationRoomContent() {
       );
     }
 
+  // Show lobby if no roomId is provided
   if (!roomId) {
-    return (
-      <div className="flex flex-col h-screen animated-bg items-center justify-center">
-        <div className="text-center p-8 bg-dark/80 backdrop-blur-glass rounded-xl shadow-custom border border-white/10">
-          <h1 className="text-4xl font-bold text-white mb-2">Collaboration Hub</h1>
-          <p className="text-lg text-gray mb-8">Create a new room or join an existing one.</p>
-          <CreateRoom onClose={() => navigate('/')} />
-        </div>
-      </div>
-    );
+    return <CollaborationLobby />;
   }
 
   return (
@@ -254,7 +249,10 @@ export function CollaborationRoomContent() {
                 <ChevronLeft className="w-4 h-4" />
                 Back to Lobby
               </Button>
-              <h1 className="text-xl font-semibold text-white">{room?.name}</h1>
+              <h1 className="text-xl font-semibold text-white">{room?.name || `Room ${roomId}`}</h1>
+              <Badge variant="outline" className="text-xs">
+                {roomId}
+              </Badge>
             </div>
             <div className="flex items-center gap-6">
               <RealtimeCollaborationIndicator />
@@ -354,4 +352,4 @@ export default function CollaborationRoomPage() {
     </CollaborationProvider>
     </CollaborationErrorBoundary>
   );
-} 
+}
