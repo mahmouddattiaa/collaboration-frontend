@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+    /* Custom theme variables */
+    --dark: #0f172a;
+    --dark-light: #1e293b;
+    --darker: #020617;
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #6366f1;
+    --emerald: #10b981;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+    --gray: #6b7280;
+    --gray-dark: #374151;
+    --light: #f8fafc;
+}
+
+.dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+    body {
+        @apply bg-background text-foreground text-white;
+        background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+        font-family: 'Inter', sans-serif;
+        background-attachment: fixed;
+    }
+    /* Apply the same cosmic gradient to containers that use the `animated-bg` utility */
+    .animated-bg {
+        background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+        background-attachment: fixed;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+    .glass-pane {
+        @apply bg-white/10 backdrop-blur-md border border-white/10;
+    }
+    .input-field {
+        @apply bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white placeholder-white/40 focus: outline-none focus: ring-2 focus: ring-primary-500;
+    }
+}
+
+@layer utilities {
+    .text-light {
+        color: var(--light);
+    }
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Custom emerald scrollbar for the whole app */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #34d399;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6ee7b7;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/* Firefox */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #34d399 transparent;
+}
