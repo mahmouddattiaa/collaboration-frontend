@@ -50,18 +50,26 @@ module.exports = {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
-                // Custom theme colors
-                'theme-primary': '#3b82f6',
-                'theme-primary-dark': '#2563eb',
-                'theme-secondary': '#6366f1',
-                'theme-dark': '#0f172a',
-                'theme-darker': '#020617',
-                'theme-light': '#f8fafc',
+                // Custom theme colors matching the teal design
+                'theme-primary': '#14b8a6',
+                'theme-primary-dark': '#0f766e',
+                'theme-primary-light': '#5eead4',
+                'theme-secondary': '#06b6d4',
+                'theme-accent': '#10b981',
+                'theme-dark': '#0f1419',
+                'theme-dark-light': '#1a2332',
+                'theme-darker': '#0a0e13',
+                'theme-card': '#1e2a3a',
+                'theme-card-hover': '#243447',
                 'theme-emerald': '#10b981',
                 'theme-red': '#ef4444',
                 'theme-yellow': '#f59e0b',
-                'theme-gray': '#6b7280',
-                'theme-gray-dark': '#374151',
+                'theme-orange': '#f97316',
+                'theme-gray': '#64748b',
+                'theme-gray-dark': '#475569',
+                'theme-gray-light': '#94a3b8',
+                'theme-light': '#f1f5f9',
+                'theme-white': '#ffffff',
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -77,18 +85,32 @@ module.exports = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: 0 },
                 },
+                "pulse-teal": {
+                    "0%, 100%": { 
+                        boxShadow: "0 0 0 0 rgba(20, 184, 166, 0.4)"
+                    },
+                    "50%": { 
+                        boxShadow: "0 0 0 10px rgba(20, 184, 166, 0)"
+                    }
+                }
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                "pulse-teal": "pulse-teal 2s infinite",
             },
             boxShadow: {
-                'custom': '0 4px 20px rgba(0, 0, 0, 0.15)',
-                'glow': '0 0 15px rgba(59, 130, 246, 0.5)',
+                'custom': '0 4px 20px rgba(0, 0, 0, 0.25)',
+                'glow': '0 0 15px rgba(20, 184, 166, 0.5)',
+                'teal-glow': '0 8px 30px rgba(20, 184, 166, 0.15)',
             },
             backdropFilter: {
-                'glass': 'blur(8px)',
+                'glass': 'blur(12px)',
             },
+            backgroundImage: {
+                'gradient-teal': 'linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%)',
+                'gradient-dark': 'linear-gradient(135deg, #0f1419 0%, #0a0e13 100%)',
+            }
         },
     },
     plugins: [require("tailwindcss-animate")],

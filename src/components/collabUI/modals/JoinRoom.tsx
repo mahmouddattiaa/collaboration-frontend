@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users } from 'lucide-react';
+import { Users, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -43,62 +43,69 @@ export function JoinRoom({ onClose }: JoinRoomProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-dark/90 border border-white/10 rounded-lg w-full max-w-md overflow-hidden">
-        <div className="p-6">
-          <h2 className="text-2xl font-bold mb-4">Join Room</h2>
-          
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="roomCode" className="block text-sm font-medium mb-1">
-                Room Code
-              </label>
-              <Input
-                id="roomCode"
-                value={roomCode}
-                onChange={(e) => {
-                  setRoomCode(e.target.value);
-                  setError('');
-                }}
-                placeholder="Enter room code..."
-                required
-                className={error ? 'border-theme-red' : ''}
-              />
-              {error && (
-                <p className="text-theme-red text-sm mt-1">{error}</p>
-              )}
-            </div>
-            
-            <div className="text-sm text-white/60">
-              Ask the room host for the room code to join their collaboration session.
-            </div>
-            
-            <div className="flex gap-3 mt-6">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onClose}
-                className="flex-1"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                className="flex-1 gap-2"
-                disabled={isJoining || !roomCode.trim()}
-              >
-                {isJoining ? (
-                  <>Joining...</>
-                ) : (
-                  <>
-                    <Users className="w-4 h-4" />
-                    Join Room
-                  </>
-                )}
-              </Button>
-            </div>
-          </form>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="dashboard-card w-full max-w-md">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-white">Join Room</h2>
+          <Button variant="ghost" size="icon" onClick={onClose} className="hover:bg-white/10">
+            <X className="w-5 h-5" />
+          </Button>
         </div>
+        
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="roomCode" className="block text-sm font-medium mb-2 text-theme-gray-light">
+              Room Code
+            </label>
+            <Input
+              id="roomCode"
+              value={roomCode}
+              onChange={(e) => {
+                setRoomCode(e.target.value);
+                setError('');
+              }}
+              placeholder="Enter room code..."
+              required
+              className={`bg-theme-dark border-white/20 text-white placeholder:text-theme-gray focus:border-theme-primary ${
+                error ? 'border-theme-red' : ''
+              }`}
+            />
+            {error && (
+              <p className="text-theme-red text-sm mt-2">{error}</p>
+            )}
+          </div>
+          
+          <div className="bg-theme-dark/50 border border-white/10 rounded-lg p-4">
+            <p className="text-sm text-theme-gray-light">
+              Ask the room host for the room code to join their collaboration session.
+            </p>
+          </div>
+          
+          <div className="flex gap-3 pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 border-white/20 hover:bg-white/10 text-white"
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              className="flex-1 bg-theme-secondary hover:bg-theme-secondary/90 text-white font-medium"
+              disabled={isJoining || !roomCode.trim()}
+            >
+              {isJoining ? (
+                <>Joining...</>
+              ) : (
+                <>
+                  <Users className="w-4 h-4 mr-2" />
+                  Join Room
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   );
