@@ -1,5 +1,5 @@
-// API Base URLs
-export const API_BASE_URL = 'http://localhost:5001';
+// API Base URLs - Fixed to match your server
+export const API_BASE_URL = 'http://localhost:4001';
 export const COLLAB_BASE_URL = 'http://localhost:4001';
 export const SOCKET_URL = 'http://localhost:4001';
 

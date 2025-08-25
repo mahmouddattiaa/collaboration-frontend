@@ -70,6 +70,9 @@ module.exports = {
                 'theme-gray-light': '#94a3b8',
                 'theme-light': '#f1f5f9',
                 'theme-white': '#ffffff',
+                // Aliases for common usage
+                'dark': '#0f1419',
+                'dark-secondary': '#1e2a3a',
             },
             borderRadius: {
                 lg: "var(--radius)",
