@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Plus, 
@@ -22,8 +22,13 @@ export function Dashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   
   const { user, logout } = useAuth();
-  const { rooms, isLoading } = useRoom();
+  const { rooms, isLoading, getUserRooms } = useRoom();
   const navigate = useNavigate();
+
+  // ✨ NEW: Load user's rooms when dashboard mounts
+  useEffect(() => {
+    getUserRooms();
+  }, [getUserRooms]);
 
   const handleLogout = () => {
     logout();

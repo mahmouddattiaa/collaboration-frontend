@@ -8,7 +8,8 @@ interface SidebarItemProps {
   onClick?: () => void;
 }
 
-export function SidebarItem({ icon, label, isActive = false, onClick }: SidebarItemProps) {
+// Memoized to prevent re-renders when parent re-renders
+export const SidebarItem = React.memo(function SidebarItem({ icon, label, isActive = false, onClick }: SidebarItemProps) {
   return (
     <button
       onClick={onClick}
@@ -28,4 +29,4 @@ export function SidebarItem({ icon, label, isActive = false, onClick }: SidebarI
       <span className="truncate">{label}</span>
     </button>
   );
-} 
+}); 
